@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angry ChatGPT</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1a1a1a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background-color: #cc0000;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .chat-container {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    .message {
+      margin: 0.5rem 0;
+      max-width: 80%;
+      padding: 0.8rem;
+      border-radius: 12px;
+    }
+    .user {
+      align-self: flex-end;
+      background-color: #444;
+    }
+    .bot {
+      align-self: flex-start;
+      background-color: #cc0000;
+    }
+    .input-container {
+      display: flex;
+      padding: 1rem;
+      background-color: #111;
+    }
+    input {
+      flex: 1;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #cc0000;
+      border: none;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <header>😡 Angry ChatGPT</header>
+  <div class="chat-container" id="chat"></div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Zadaj pytanie, ale lepiej żeby było sensowne...">
+    <button onclick="sendMessage()">Wyślij</button>
+  </div>
+
+  <script>
+    const chat = document.getElementById("chat");
+
+    const angryResponses = [
+      "Serio? To twoje pytanie?",
+      "Nie mam czasu na takie bzdury.",
+      "Zastanów się zanim zadasz kolejne pytanie.",
+      "To było głupie. Próbuj dalej.",
+      "Czy ja wyglądam na kogoś, kto chce to wiedzieć?",
+      "Masz jeszcze coś tak irytującego do powiedzenia?",
+      "Wow, głębokie... jak kałuża."
+    ];
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage("user", message);
+      input.value = "";
+
+      setTimeout(() => {
+        const angry = angryResponses[Math.floor(Math.random() * angryResponses.length)];
+        addMessage("bot", angry);
+      }, 600);
+    }
+
+    function addMessage(sender, text) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
+      chat.appendChild(msg);
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+</body>
+</html>
